@@ -1,0 +1,4 @@
+namespace = dev
+repo = api
+ver = 4.0
+reg = us-east-2
