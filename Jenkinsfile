@@ -28,38 +28,38 @@ pipeline {
         }
       }
     }
-    stage('Image build: WEB') {
-      steps {
-        dir('front') {
-          sh 'make build'
-        }
-      }
-    }
-    stage('Image build: API') {
-      steps {
-        dir('back') {
-          sh 'make build'
-        }
-      }
-    }
-    stage('Push to Repo') {
-            parallel {
-                stage('WEB-repo') {
-                    steps {
-                      dir('front') {
-                        sh 'make push'
-                      }
-                    }
-                }
-                stage('API-repo') {
-                    steps {
-                        dir('back') {
-                          sh 'make push'
-                        }
-                    }
-                }
-            }
-        }
+    // stage('Image build: WEB') {
+    //   steps {
+    //     dir('front') {
+    //       sh 'make build'
+    //     }
+    //   }
+    // }
+    // stage('Image build: API') {
+    //   steps {
+    //     dir('back') {
+    //       sh 'make build'
+    //     }
+    //   }
+    // }
+    // stage('Push to Repo') {
+    //         parallel {
+    //             stage('WEB-repo') {
+    //                 steps {
+    //                   dir('front') {
+    //                     sh 'make push'
+    //                   }
+    //                 }
+    //             }
+    //             stage('API-repo') {
+    //                 steps {
+    //                     dir('back') {
+    //                       sh 'make push'
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
     stage('Deploy to the EKS cluster') {
             parallel {
                 stage('WEB') {
