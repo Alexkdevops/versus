@@ -5,10 +5,6 @@ pipeline {
       yamlFile 'jenkins-slave.yaml'
     }
   }
-  environment {
-    MYSQL_USER     = credentials('MYSQL_USER')
-    MYSQL_PASSWORD = credentials('MYSQL_PASSWORD')  
-  }  
   stages {
     stage ('Initialize: Environment') {
       steps {
