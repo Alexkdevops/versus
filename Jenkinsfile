@@ -11,7 +11,7 @@ pipeline {
         script {
           if (env.GIT_BRANCH == 'main') {
             stage ('Stage: Main') {
-                env.STAGE = 'Main'
+                env.STAGE = 'main'
                 sh 'echo ${STAGE}'
             }
           } else if (env.GIT_BRANCH == 'dev') {
