@@ -8,8 +8,7 @@ metadata:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  namespace: NAMESPACE
-  name: NAMESPACE
+  name: frontend-svc
   annotations:
     # use the shared ingress-nginx
     kubernetes.io/ingress.class: "nginx"
