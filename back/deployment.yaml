@@ -8,7 +8,6 @@ metadata:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  namespace: NAMESPACE
   name: ingress-svc
   annotations:
     # use the shared ingress-nginx
@@ -25,17 +24,7 @@ spec:
             name: backend
             port:
               number: 8080
-  - host: front.alexkdevops.click
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service: 
-            name: frontend
-            port:
-              number: 80
-                          
+                         
 ---
 
 apiVersion: v1
