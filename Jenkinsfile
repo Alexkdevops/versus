@@ -5,18 +5,27 @@ pipeline {
       yamlFile 'jenkins-slave.yaml'
     }
   }
+  environment {
+    MYSQL_USER     = credentials('MYSQL_USER')
+    MYSQL_PASSWORD = credentials('MYSQL_PASSWORD')  
+  }  
   stages {
-    stage ('Manage: Environment') {
+    stage ('Initialize: Environment') {
       steps {
         script {
           if (env.GIT_BRANCH == 'prod') {
-            stage ('Stage: Production') {
+            stage ('Stage: Prod') {
                 env.STAGE = 'prod'
                 sh 'echo ${STAGE}'
             }
-          } else {
-            stage ('Stage: Development') {
+          } else if (env.GIT_BRANCH == 'dev') {
+            stage ('Stage: Dev') {
                 env.STAGE = 'dev'
+                sh 'echo ${STAGE}'
+            }  
+          } else {
+            stage ('Stage: Main') {
+                env.STAGE = 'main'
                 sh 'echo ${STAGE}'
             }
           }            
