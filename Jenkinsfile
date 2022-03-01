@@ -9,9 +9,9 @@ pipeline {
     stage ('Initialize: Environment') {
       steps {
         script {
-          if (env.GIT_BRANCH == 'prod') {
-            stage ('Stage: Prod') {
-                env.STAGE = 'Prod'
+          if (env.GIT_BRANCH == 'main') {
+            stage ('Stage: Main') {
+                env.STAGE = 'Main'
                 sh 'echo ${STAGE}'
             }
           } else if (env.GIT_BRANCH == 'dev') {
@@ -19,9 +19,9 @@ pipeline {
                 env.STAGE = 'dev'
                 sh 'echo ${STAGE}'
             }  
-          } else if (env.GIT_BRANCH == 'main') {
-            stage ('Stage: Main') {
-                env.STAGE = 'main'
+          } else if (env.GIT_BRANCH == 'prod') {
+            stage ('Stage: Prod') {
+                env.STAGE = 'prod'
                 sh 'echo ${STAGE}'
             }
           }            
