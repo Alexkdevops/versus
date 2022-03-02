@@ -67,12 +67,12 @@ spec:
         - containerPort: 8080
         env:
           - name: MYSQL_USER
-            value: "versus"
+            value: "admin"
           - name: MYSQL_PASSWORD
             value: "password"
           - name: MYSQL_PORT
             value: "3306"
           - name: MYSQL_HOST
-            value: "versus.c7pmwjifbb9j.REG.rds.amazonaws.com"
+            value: "versus21c.c7pmwjifbb9j.REG.rds.amazonaws.com"
           - name: MYSQL_DATABASE
-            value: "versus"
+            value: "versus21c"
