@@ -9,6 +9,7 @@ build:
 
 push:
 	@aws ecr get-login-password --region $(reg) | docker login --username AWS --password-stdin $(acct).dkr.ecr.$(reg).amazonaws.com
+	@aws ecr create-repository --repository-name $(repo) --region=$(reg) || true
 	@docker push $(image)
 
 deploy:
