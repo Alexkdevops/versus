@@ -1,9 +1,12 @@
+# Create namespace if we add new "Environment"
+
 apiVersion: v1
 kind: Namespace
 metadata:
   name: NAMESPACE
 
 ---  
+# Create ingress for our backend
 
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -28,6 +31,8 @@ spec:
                          
 ---
 
+#Service for backend
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -42,6 +47,44 @@ spec:
     app: api
 
 ---
+
+#Service for connection between POD in our cluster and RDS-database 
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: NAMESPACE
+  labels:
+    app: mysql-service
+  name: mysql-service
+spec:
+  externalName: versus21c.c7pmwjifbb9j.REG.rds.amazonaws.com # This one is hardcoded, there is a way to hide it in env var
+  selector:
+    app: mysql-service
+  type: ExternalName
+status:
+  loadBalancer: {}
+
+---
+
+# Create secret to store database credentials to connect to database
+
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: NAMESPACE
+  creationTimestamp: null
+  name: credentials
+data:
+  database: dmVyc3VzMjFj
+  host: dmVyc3VzMjFjLmM3cG13amlmYmI5ai5SRUcucmRzLmFtYXpvbmF3cy5jb20=
+  password: cGFzc3dvcmQ=
+  port: MzMwNg==
+  user: YWRtaW4=
+
+---  
+
+# Backend deployment, which has to be connected to our database
 
 apiVersion: apps/v1
 kind: Deployment
@@ -96,16 +139,3 @@ spec:
             secretKeyRef:
               name: credentials
               key: database
-
-
-
-          # - name: MYSQL_USER
-          #   value: "admin"
-          # - name: MYSQL_PASSWORD
-          #   value: "password"
-          # - name: MYSQL_PORT
-          #   value: "3306"
-          # - name: MYSQL_HOST
-          #   value: "versus21c.c7pmwjifbb9j.REG.rds.amazonaws.com"
-          # - name: MYSQL_DATABASE
-          #   value: "versus21c"

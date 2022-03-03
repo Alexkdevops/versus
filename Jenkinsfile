@@ -5,10 +5,6 @@ pipeline {
       yamlFile 'jenkins-slave.yaml'
     }
   }
-  // environment {
-  //   MYSQL_USER     = credentials('MYSQL_USER')
-  //   MYSQL_PASSWORD = credentials('MYSQL_PASSWORD')
-  // }
   stages {
     stage ('Environment') {
       steps {
@@ -32,38 +28,38 @@ pipeline {
         }
       }
     }
-    // stage('Image: WEB') {
-    //   steps {
-    //     dir('front') {
-    //       sh 'make build'
-    //     }
-    //   }
-    // }
-    // stage('Image: API') {
-    //   steps {
-    //     dir('back') {
-    //       sh 'make build'
-    //     }
-    //   }
-    // }
-    // stage('Repo') {
-    //         parallel {
-    //             stage('WEB-repo') {
-    //                 steps {
-    //                   dir('front') {
-    //                     sh 'make push'
-    //                   }
-    //                 }
-    //             }
-    //             stage('API-repo') {
-    //                 steps {
-    //                     dir('back') {
-    //                       sh 'make push'
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
+    stage('Image: WEB') {
+      steps {
+        dir('front') {
+          sh 'make build'
+        }
+      }
+    }
+    stage('Image: API') {
+      steps {
+        dir('back') {
+          sh 'make build'
+        }
+      }
+    }
+    stage('Repo') {
+            parallel {
+                stage('WEB-repo') {
+                    steps {
+                      dir('front') {
+                        sh 'make push'
+                      }
+                    }
+                }
+                stage('API-repo') {
+                    steps {
+                        dir('back') {
+                          sh 'make push'
+                        }
+                    }
+                }
+            }
+        }
     stage('Deploy to the EKS cluster') {
             parallel {
                 stage('WEB') {
