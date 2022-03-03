@@ -65,14 +65,14 @@ spec:
         image: ACCT.dkr.ecr.REG.amazonaws.com/REPO:VER
         ports:
         - containerPort: 8080
-        # env:
-        #   - name: MYSQL_USER
-        #     value: "admin"
-        #   - name: MYSQL_PASSWORD
-        #     value: "password"
-        #   - name: MYSQL_PORT
-        #     value: "3306"
-        #   - name: MYSQL_HOST
-        #     value: "versus21c.c7pmwjifbb9j.REG.rds.amazonaws.com"
-        #   - name: MYSQL_DATABASE
-        #     value: "versus21c"
+        env:
+          - name: MYSQL_USER
+            value: "admin"
+          - name: MYSQL_PASSWORD
+            value: "password"
+          - name: MYSQL_PORT
+            value: "3306"
+          - name: MYSQL_HOST
+            value: "versus21c.c7pmwjifbb9j.REG.rds.amazonaws.com"
+          - name: MYSQL_DATABASE
+            value: "versus21c"
