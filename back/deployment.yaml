@@ -15,7 +15,7 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-  - host: back.alexkdevops.click
+  - host: www.back.alexkdevops.click
     http:
       paths:
       - path: "/"
