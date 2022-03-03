@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: main
+  namespace: NAMESPACE
   labels:
     app: mysql-service
   name: mysql-service
 spec:
-  externalName: versus21c.c7pmwjifbb9j.us-east-2.rds.amazonaws.com
+  externalName: versus21c.c7pmwjifbb9j.REG.rds.amazonaws.com
   selector:
     app: mysql-service
   type: ExternalName
