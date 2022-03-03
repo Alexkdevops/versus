@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#Delete NS
+
+kubectl delete ns main dev prod
+
 # Delete deploy from all namespaces
 kubectl delete deploy api-deployment -n main
 kubectl delete deploy web-deployment -n main
