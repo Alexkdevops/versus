@@ -1,5 +1,3 @@
-#Having this file in folder do not affect the whole process
-
 apiVersion: v1
 kind: Namespace
 metadata:
