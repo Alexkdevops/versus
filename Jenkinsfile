@@ -30,14 +30,14 @@ pipeline {
     }
     stage('Image: WEB') {
       steps {
-        dir('front') {
+        dir('frontend') {
           sh 'make build'
         }
       }
     }
     stage('Image: API') {
       steps {
-        dir('back') {
+        dir('backend') {
           sh 'make build'
         }
       }
@@ -46,32 +46,32 @@ pipeline {
             parallel {
                 stage('WEB-repo') {
                     steps {
-                      dir('front') {
+                      dir('frontend') {
                         sh 'make push'
                       }
                     }
                 }
                 stage('API-repo') {
                     steps {
-                        dir('back') {
+                        dir('backend') {
                           sh 'make push'
                         }
                     }
                 }
             }
         }
-    stage('Deploy to the EKS cluster') {
+    stage('Deployment:') {
             parallel {
                 stage('WEB') {
                     steps {
-                      dir('front') {
+                      dir('frontend') {
                         sh 'make deploy'
                       }
                     }
                 }
                 stage('API') {
                     steps {
-                        dir('back') {
+                        dir('backend') {
                           sh 'make deploy'
                         }
                     }
